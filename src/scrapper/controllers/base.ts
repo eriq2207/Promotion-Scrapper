@@ -11,6 +11,7 @@ export abstract class BaseScrapper {
     protected page: puppeteer.Page;
 
     protected async startBrowser() {
+        console.log("Launching web browser..")
         this.browser = await puppeteer.launch({
             headless : false
         });
@@ -20,12 +21,15 @@ export abstract class BaseScrapper {
         });
     }
     protected async refreshPage(){
+        console.log("Refreshing web browser..")
         return await this.page.reload()
     }
     protected async closeBrowser() {
+        console.log("Closing web browser..")
         await this.browser.close()
     }
     protected async executeJS(pageFn: any) {
+        console.log("Invoking JS function: " + pageFn)
         return await this.page.evaluate(pageFn) 
     }
 }
